@@ -8,9 +8,9 @@ WORKDIR /app
 COPY . /app
 
 RUN export SYNONYMS_WORD2VEC_BIN_URL_ZH_CN=https://gitee.com/chatopera/cskefu/releases/download/backups/words.vector.gz \
-    && pip install --user -r Requirements.txt
-RUN pip install -U synonyms \
-    && python -c "import synonyms" # download word vectors file
+    && pip3 install --user -r Requirements.txt
+RUN pip3 install -U synonyms
+RUN python3 -c "import synonyms" # download word vectors file
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
