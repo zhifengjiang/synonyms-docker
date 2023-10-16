@@ -1,6 +1,5 @@
 from flask import Flask, request
 import synonyms
-import numpy as np  # Import numpy to help with the conversion
 
 app = Flask(__name__)
 
@@ -9,11 +8,12 @@ app = Flask(__name__)
 def nearby():
     word = request.args.get("word")
     if word:
-        # Get the synonyms and their scores
-        words, scores = synonyms.nearby(word)
-        # Convert float32 to float
-        scores = [float(score) for score in scores]
-        return {"synonyms": list(zip(words, scores))}
+        words, _ = synonyms.nearby(
+            word
+        )  # Assuming synonyms.nearby returns a tuple of words and scores
+        # Create a list of dictionaries with the word key
+        synonyms_list = [{"word": word} for word in words]
+        return {"synonyms": synonyms_list}
     else:
         return {"error": "word parameter is required"}
 
