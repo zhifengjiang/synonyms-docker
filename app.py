@@ -11,8 +11,10 @@ def nearby():
         words, _ = synonyms.nearby(
             word, 30
         )  # Assuming synonyms.nearby returns a tuple of words and scores
-        # Filter out the query word and ensure only 20 synonyms are returned
-        synonyms_list = [{"word": synonym} for synonym in words if synonym != word][:20]
+        # Filter out the query word, ensure only 20 synonyms are returned, and ensure each synonym is non-empty
+        synonyms_list = [
+            {"word": synonym} for synonym in words if synonym and synonym != word
+        ][:20]
         return {"synonyms": synonyms_list}
     else:
         return {"error": "word parameter is required"}
