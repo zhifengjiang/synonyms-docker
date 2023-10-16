@@ -9,11 +9,10 @@ def nearby():
     word = request.args.get("word")
     if word:
         words, _ = synonyms.nearby(
-            word
-        )  
-        # Assuming synonyms.nearby returns a tuple of words and scores
-        # Create a list of dictionaries with the word key
-        synonyms_list = [{"word": word} for word in words]
+            word, 30
+        )  # Assuming synonyms.nearby returns a tuple of words and scores
+        # Filter out the query word and ensure only 20 synonyms are returned
+        synonyms_list = [{"word": synonym} for synonym in words if synonym != word][:20]
         return {"synonyms": synonyms_list}
     else:
         return {"error": "word parameter is required"}
