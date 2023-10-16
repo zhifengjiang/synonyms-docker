@@ -10,7 +10,8 @@ def nearby():
     if word:
         words, _ = synonyms.nearby(
             word
-        )  # Assuming synonyms.nearby returns a tuple of words and scores
+        )  
+        # Assuming synonyms.nearby returns a tuple of words and scores
         # Create a list of dictionaries with the word key
         synonyms_list = [{"word": word} for word in words]
         return {"synonyms": synonyms_list}
